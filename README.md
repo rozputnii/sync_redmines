@@ -1,5 +1,5 @@
 # sync_redmines
-Script for synchronize redmine issues and logtimes to another redmine.
+A script for copy Redmine issues and log times to another Redmine.
 
 * Create file settings_local.py
 * Add next settings (use api KEY or USERNAME/PASSWORD):
