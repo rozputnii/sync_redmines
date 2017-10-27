@@ -58,9 +58,9 @@ class Syncer(object):
 
         for te in src_entries:
             if te in dst_entries:
-                print('NO %s %s' % (te[0], te[2]))
+                print('EXISTS %s %s' % (te[0], te[2]))
                 continue
-            
+
             new_te = self.dst.time_entry.create(project_id=dst_project_id,
                                                 spent_on=te[0],
                                                 hours=te[1],
@@ -71,10 +71,16 @@ class Syncer(object):
 
 if __name__ == '__main__':
     # Fix Python 2.x.
-    try:
-        input = raw_input
-    except NameError:
-        pass
-    syncer = Syncer(input('From date: '), input('To date: '))
+    
+    if len(sys.argv) > 2:
+        from_date = sys.argv[1]
+        to_date = sys.argv[2]
+    else:
+        try: input = raw_input
+        except NameError: pass
+        from_date = input('From date: ')
+        to_date = input('To date: ')
+    
+    syncer = Syncer(from_date, to_date)
     syncer.sync_time_entries()
     sys.exit()
